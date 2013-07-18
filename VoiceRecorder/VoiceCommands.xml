@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0">
+  <CommandSet xml:lang="en-US">
+    <CommandPrefix>Record</CommandPrefix>
+    <Example> this </Example>
+
+    <Command Name="StartNewRecording">
+      <Example> start a new recording</Example>
+      <ListenFor> this </ListenFor>
+      <ListenFor> new [recording] </ListenFor>
+      <ListenFor> me </ListenFor>
+      <Feedback> Recording... </Feedback>
+      <Navigate Target="/Views/MainPage.xaml?StartAction=Record" />
+    </Command>
+    
+  </CommandSet>
+</VoiceCommands>

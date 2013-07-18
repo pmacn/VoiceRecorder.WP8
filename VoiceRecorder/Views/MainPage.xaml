@@ -1,0 +1,50 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="VoiceRecorder.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:ad="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
+    xmlns:vm="clr-namespace:VoiceRecorder.ViewModels"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:MainPageViewModel}">
+
+    <Grid x:Name="RootVisual" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        
+        <phone:Pivot x:Name="Items" Title="{Binding Path=DisplayName}">
+            <phone:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=PhoneTextTitle2Style}" />
+                </DataTemplate>
+            </phone:Pivot.TitleTemplate>
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=DisplayName}" Style="{StaticResource ResourceKey=PhoneTextTitle1Style}" />
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <phone:Pivot.ItemContainerStyle>
+                <Style TargetType="phone:PivotItem">
+                    <Setter Property="Margin" Value="37,15,15,15" />
+                </Style>
+            </phone:Pivot.ItemContainerStyle>
+        </phone:Pivot>
+        <ad:AdControl
+            x:Name="BannerAd"
+            Grid.Row="1"
+            VerticalAlignment="Bottom"
+            ApplicationId="64d7bd96-917c-4570-bbb2-d7e25297c0dc"
+            AdUnitId="115170"
+            Width="480"
+            Height="80" />
+    </Grid>
+</phone:PhoneApplicationPage>

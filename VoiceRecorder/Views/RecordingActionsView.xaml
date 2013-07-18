@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="VoiceRecorder.Views.RecordingActionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:viewModels="clr-namespace:VoiceRecorder.ViewModels"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480" d:DataContext="{d:DesignInstance viewModels:RecordingActionsViewModel}">
+    
+    <Grid x:Name="LayoutRoot" Width="480">
+        <Grid.Background>
+            <SolidColorBrush Opacity="0.8"
+                             Color="{StaticResource ResourceKey=PhoneChromeColor}" />
+        </Grid.Background>
+        <ScrollViewer Margin="37, 0, 0, 0"
+                      VerticalScrollBarVisibility="Disabled"
+                      HorizontalScrollBarVisibility="Hidden"
+                      ManipulationMode="Control"
+                      >
+            <ListBox ItemsSource="{Binding Path=Actions}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Rectangle toolkit:TiltEffect.IsTiltEnabled="True" Width="70" Height="70" Fill="{StaticResource PhoneAccentBrush}" Margin="5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <cal:ActionMessage MethodName="Execute">
+                                        </cal:ActionMessage>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Rectangle>
+                            <Image Source="{Binding Path=IconUri}"
+                                   IsHitTestVisible="False"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

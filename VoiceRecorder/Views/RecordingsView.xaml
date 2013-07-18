@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="VoiceRecorder.Views.RecordingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:con="clr-namespace:dotnetexperiments.ValueConverters.WP8;assembly=dotnetexperiments.ValueConverters.WP8"
+    xmlns:viewModels="clr-namespace:VoiceRecorder.ViewModels"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480" d:DataContext="{d:DesignInstance viewModels:RecordingsViewModel}">
+
+    <UserControl.Resources>
+        <con:LinkedConverter x:Key="InvertedBoolToVis">
+            <con:BooleanInversionConverter />
+            <con:BooleanToVisibilityConverter />
+        </con:LinkedConverter>
+        <con:BooleanInversionConverter x:Key="InvertedBool" />
+        <con:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="0,0,0,12"
+                       Visibility="{Binding Path=IsListFiltered, Mode=OneWay, Converter={StaticResource ResourceKey=BoolToVis}}"
+                       Style="{StaticResource PhoneTextNormalStyle}"
+                       Text="The list is currently filtered." />
+        
+            <phone:LongListSelector Grid.Row="1"
+                ItemsSource="{Binding Path=Items, Mode=OneWay}"
+                Visibility="{Binding Path=IsRecording, Converter={StaticResource ResourceKey=InvertedBoolToVis}}"
+                Margin="0,0,0,2">
+            
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl HorizontalAlignment="Left" cal:View.Model="{Binding}" />
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </Grid>
+        <Grid Background="{StaticResource ResourceKey=PhoneBackgroundBrush}"
+              Visibility="{Binding Path=IsRecording, Converter={StaticResource ResourceKey=BoolToVis}}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="480">
+                <TextBlock HorizontalAlignment="Center"
+                           Style="{StaticResource ResourceKey=PhoneTextTitle2Style}"
+                           Text="{Binding Path=RecordingMessage}" />
+                <ProgressBar IsIndeterminate="True" Margin="0,34" />
+            </StackPanel>
+        </Grid>
+
+        <bab:BindableAppBar x:Name="ApplicationBar">
+            <bab:BindableAppBarButton x:Name="ShowNewRecordingDialog" 
+                                      IconUri="/Assets/ApplicationBar/microphone.png"
+                                      Visibility="{Binding Path=IsRecording, Converter={StaticResource InvertedBoolToVis}}"
+                                      Text="new"
+                                      IsEnabled="{Binding Path=IsRecording, Converter={StaticResource InvertedBool}}" />
+            <bab:BindableAppBarButton x:Name="StopRecording"
+                                      IconUri="/Assets/ApplicationBar/stop.png"
+                                      Visibility="{Binding Path=IsRecording, Converter={StaticResource BoolToVis}}"
+                                      Text="stop"
+                                      IsEnabled="{Binding Path=IsRecording}" />
+            <bab:BindableAppBarButton x:Name="ShowFilterSettingsDialog"
+                                      IconUri="/Assets/ApplicationBar/filter.png"
+                                      Text="filter"
+                                      IsEnabled="{Binding Path=IsRecording, Converter={StaticResource InvertedBool}}" />
+            <bab:BindableAppBarMenuItem x:Name="NavigateToAbout" Text="about" />
+            <bab:BindableAppBarMenuItem x:Name="NavigateToSettings" Text="settings" />
+        </bab:BindableAppBar>
+    </Grid>
+</UserControl>

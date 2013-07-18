@@ -1,0 +1,68 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="VoiceRecorder.Views.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:ad="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}">
+    
+    <UserControl.Resources>
+        <Style x:Key="RecentChange" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Margin" Value="15" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style x:Key="UpcomingChange" TargetType="TextBlock" BasedOn="{StaticResource RecentChange}">
+            <Setter Property="Foreground" Value="Gray" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="24, 17, 24, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource ResourceKey=PhoneTextTitle2Style}" Text="VOICERECORDER" />
+            <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=PhoneTextTitle1Style}" Text="about" />
+            <ScrollViewer Grid.Row="2" Margin="0, 25, 0, 15">
+                <StackPanel>
+                    <TextBlock Text="Recent changes:" Style="{StaticResource ResourceKey=PhoneTextGroupHeaderStyle}" />
+                    <TextBlock Text="You can now export your recordings to the media library on your phone."
+                               Style="{StaticResource RecentChange}" />
+                    <TextBlock Text="You can now start a recording by using the voice commands 'Record me' or 'Record this'"
+                               Style="{StaticResource RecentChange}" />
+                    <TextBlock Text="Added the ability to create tags and assign them to different recordings as well as filter the recordings list based on tags."
+                               Style="{StaticResource RecentChange}" />
+                    <TextBlock Text="Now able to record while the screen is locked"
+                               Style="{StaticResource RecentChange}" />
+                    <TextBlock Text="UI redesigned to be slightly more compact and more 'Windows Phone'."
+                               Style="{StaticResource RecentChange}" />
+                    <Button x:Name="SendFeedback" Content="email feedback" Margin="0, 42" />
+                    <TextBlock Text="Upcoming changes:"
+                               Style="{StaticResource PhoneTextGroupHeaderStyle}" />
+                    <TextBlock Text="More options for exporting your recordings."
+                               Style="{StaticResource ResourceKey=UpcomingChange}" />
+                    <TextBlock Text="In-app purchase to remove ads."
+                               Style="{StaticResource ResourceKey=UpcomingChange}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <ad:AdControl
+            x:Name="MyAdControl"
+            Grid.Row="1"
+            VerticalAlignment="Bottom"
+            ApplicationId="64d7bd96-917c-4570-bbb2-d7e25297c0dc"
+            AdUnitId="123172"
+            Width="480"
+            Height="80" />
+    </Grid>
+</phone:PhoneApplicationPage>

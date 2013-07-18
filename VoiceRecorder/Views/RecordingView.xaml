@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="VoiceRecorder.Views.RecordingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:viewModels="clr-namespace:VoiceRecorder.ViewModels"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DataContext="{d:DesignInstance viewModels:RecordingViewModel}">
+
+    <StackPanel Margin="0,12">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Tap">
+                <cal:ActionMessage MethodName="NavigateToDetails" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <TextBlock x:Name="Name"
+                    Style="{StaticResource PhoneTextAccentStyle}" />
+        <TextBlock x:Name="DateCreated"
+                    Text="{Binding Path=DateCreated, Mode=OneWay, StringFormat=\{0:G\}}"
+                    Style="{StaticResource PhoneTextNormalStyle}"/>
+    </StackPanel>
+</UserControl>

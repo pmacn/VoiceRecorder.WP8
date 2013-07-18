@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="VoiceRecorder.Views.NewRecordingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid Background="{StaticResource PhoneChromeBrush}" VerticalAlignment="Top">
+            <StackPanel Margin="24, 17, 24, 12">
+                <TextBlock Text="New recording"
+                           Style="{StaticResource ResourceKey=PhoneTextTitle2Style}" />
+                <TextBlock Text="Enter a name for your new recording or just start recording and give it a name later."
+                           Margin="15"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="DesiredRecordingName" Hint="Name your recording" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="Create" Content="start" />
+                    <Button Grid.Column="1" x:Name="Cancel" Content="cancel" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
